@@ -1,2 +1,2 @@
-# backend-lab
-Initial backand repository for labs.
+# backend-lab-3
+Backend repository for labs (Java)
