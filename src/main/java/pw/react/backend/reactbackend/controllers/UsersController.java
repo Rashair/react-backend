@@ -11,7 +11,9 @@ import pw.react.backend.reactbackend.models.User;
 import pw.react.backend.reactbackend.services.UsersService;
 
 import javax.validation.Valid;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/spring-demo")
@@ -37,6 +39,16 @@ public class UsersController {
         return ResponseEntity.ok(result);
     }
 
+    @GetMapping("/users/{id}")
+    public ResponseEntity<User> getUser(@PathVariable(value = "id") int id) {
+        User result = usersService.findById(id);
+        if (result == null) {
+            throw new UserNotFoundException("Id: " + id);
+        }
+
+        return ResponseEntity.ok(result);
+    }
+
     @PostMapping("/users/")
     public ResponseEntity<User> createUser(@Valid @RequestBody User user) {
         if (usersService.exists(user)) {
@@ -46,6 +58,34 @@ public class UsersController {
         User result = usersService.save(user);
 
         return ResponseEntity.ok(result);
+    }
+
+    @PutMapping("/users/{id}")
+    public ResponseEntity<User> updateUser(@PathVariable(value = "id") int id, @Valid @RequestBody User user) {
+        User userToUpdate = usersService.findById(id);
+        if (userToUpdate == null) {
+            throw new UserNotFoundException("Id: " + id);
+        }
+
+        userToUpdate.setAllDetails(user.getLogin(), user.getFirstName(), user.getLastName(), user.getDateOfBirth(),
+                user.getIsActive());
+        final User updatedUser = usersService.save(userToUpdate);
+
+        return ResponseEntity.ok(updatedUser);
+    }
+
+    @DeleteMapping("/users/{id}")
+    public ResponseEntity<Map<String, Boolean>> deleteUser(@PathVariable(value = "id") int id) {
+        User userToDelete = usersService.findById(id);
+        if (userToDelete == null) {
+            throw new UserNotFoundException("Id: " + id);
+        }
+
+        usersService.delete(userToDelete);
+        Map<String, Boolean> response = new HashMap<>();
+        response.put("deleted", Boolean.TRUE);
+
+        return ResponseEntity.ok(response);
     }
 
     @ExceptionHandler({UserAlreadyExistsException.class})

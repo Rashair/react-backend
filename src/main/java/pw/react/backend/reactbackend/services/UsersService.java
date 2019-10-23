@@ -24,6 +24,10 @@ public class UsersService {
         return usersRepository.findByLogin(login);
     }
 
+    public User findById(int id) {
+        return usersRepository.findById(id);
+    }
+
     public User save(User user) {
         return usersRepository.save(user);
     }
@@ -31,5 +35,9 @@ public class UsersService {
     public boolean exists(User user) {
         List<User> result = usersRepository.findByLogin(user.getLogin());
         return result != null && !result.isEmpty();
+    }
+
+    public void delete(User userToDelete) {
+        usersRepository.delete(userToDelete);
     }
 }

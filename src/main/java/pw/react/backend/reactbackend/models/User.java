@@ -12,7 +12,7 @@ import java.sql.Date;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int Id;
+    private int id;
 
     @Column(name = "login", nullable = false)
     private String login;
@@ -29,14 +29,21 @@ public class User {
     @Column(name = "is_active", nullable = false)
     private boolean isActive;
 
+    public void setAllDetails(String login, String firstName, String lastName, Date dateOfBirth, boolean isActive) {
+        setLogin(login);
+        setFirstName(firstName);
+        setLastName(lastName);
+        setDateOfBirth(dateOfBirth);
+        setIsActive(isActive);
+    }
+
     public int getId() {
-        return Id;
+        return id;
     }
 
     public void setId(int id) {
-        Id = id;
+        this.id = id;
     }
-
 
     public String getLogin() {
         return login;
@@ -45,7 +52,6 @@ public class User {
     public void setLogin(String login) {
         this.login = login;
     }
-
 
     public String getFirstName() {
         return firstName;
@@ -71,7 +77,7 @@ public class User {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public boolean isActive() {
+    public boolean getIsActive() {
         return isActive;
     }
 
