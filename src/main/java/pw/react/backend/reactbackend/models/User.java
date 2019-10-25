@@ -4,7 +4,7 @@ package pw.react.backend.reactbackend.models;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "users")
@@ -24,17 +24,22 @@ public class User {
     private String lastName;
 
     @Column(name = "date_of_birth")
-    private Date dateOfBirth;
+    private LocalDate dateOfBirth;
 
     @Column(name = "is_active", nullable = false)
     private boolean isActive;
 
-    public void setAllDetails(String login, String firstName, String lastName, Date dateOfBirth, boolean isActive) {
+    public User setAllDetails(String login, String firstName, String lastName, LocalDate dateOfBirth, boolean isActive) {
         setLogin(login);
         setFirstName(firstName);
         setLastName(lastName);
         setDateOfBirth(dateOfBirth);
         setIsActive(isActive);
+        return this;
+    }
+
+    public User setAllDetails(String login, String firstName, String lastName, boolean isActive) {
+        return setAllDetails(login, firstName, lastName, null, isActive);
     }
 
     public int getId() {
@@ -69,11 +74,11 @@ public class User {
         this.lastName = lastName;
     }
 
-    public Date getDateOfBirth() {
+    public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(Date dateOfBirth) {
+    public void setDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
@@ -83,5 +88,10 @@ public class User {
 
     public void setIsActive(boolean isActive) {
         this.isActive = isActive;
+    }
+
+    @Override
+    public String toString() {
+        return login + ": " + firstName + " " + lastName;
     }
 }

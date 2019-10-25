@@ -32,12 +32,12 @@ public class UsersService {
         return usersRepository.save(user);
     }
 
+    public void delete(User userToDelete) {
+        usersRepository.delete(userToDelete);
+    }
+
     public boolean exists(User user) {
         List<User> result = usersRepository.findByLogin(user.getLogin());
         return result != null && !result.isEmpty();
-    }
-
-    public void delete(User userToDelete) {
-        usersRepository.delete(userToDelete);
     }
 }

@@ -1,9 +1,9 @@
 package pw.react.backend.reactbackend.errors;
 
 public class ErrorResponse {
-    private String message;
+    private String message = "";
     private int code;
-    private String additionalInfo;
+    private String additionalInfo = "";
 
     public ErrorResponse(String message, int code, String additionalInfo) {
         this.message = message;
