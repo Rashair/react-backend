@@ -4,6 +4,7 @@ logs/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**
 !**/src/test/**
+pas-db.pass
 
 ### STS ###
 .apt_generated
@@ -30,4 +31,4 @@ build/
 
 ### VS Code ###
 .vscode/
-!/pas-db.pass
+
