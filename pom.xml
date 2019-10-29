@@ -31,6 +31,7 @@
 
         <profile>
             <id>prod</id>
+
             <properties>
                 <spring.profiles.active>prod</spring.profiles.active>
             </properties>
@@ -108,12 +109,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter</artifactId>
-            <version>RELEASE</version>
             <scope>test</scope>
         </dependency>
         <dependency>

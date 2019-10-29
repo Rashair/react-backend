@@ -29,12 +29,17 @@ public class User {
     @Column(name = "is_active", nullable = false)
     private boolean isActive;
 
-    public User setAllDetails(String login, String firstName, String lastName, LocalDate dateOfBirth, boolean isActive) {
+    public User setAllDetails(int Id, String login, String firstName, String lastName, LocalDate dateOfBirth, boolean isActive) {
         setLogin(login);
         setFirstName(firstName);
         setLastName(lastName);
         setDateOfBirth(dateOfBirth);
         setIsActive(isActive);
+        return this;
+    }
+
+    public User setAllDetails(String login, String firstName, String lastName, LocalDate dateOfBirth, boolean isActive) {
+        setAllDetails(0, login, firstName, lastName, dateOfBirth, isActive);
         return this;
     }
 
