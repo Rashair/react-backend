@@ -30,6 +30,13 @@
         </profile>
 
         <profile>
+            <id>prod</id>
+            <properties>
+                <spring.profiles.active>prod</spring.profiles.active>
+            </properties>
+        </profile>
+
+        <profile>
             <id>it</id>
             <properties>
                 <spring.profiles.active>it</spring.profiles.active>

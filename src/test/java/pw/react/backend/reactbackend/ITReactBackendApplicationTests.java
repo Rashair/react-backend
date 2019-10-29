@@ -43,16 +43,16 @@ public class ITReactBackendApplicationTests {
 
     @Test
     void givenUsers_whenPostIsRequested_thenReturnCorrectResponse() throws Exception {
-        this.mockMvc.perform(post("/spring-demo/users/").contentType(MediaType.APPLICATION_JSON)
+        this.mockMvc.perform(post("/users/").contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(users.get(0)))).andExpect(status().is2xxSuccessful());
     }
 
     @Test
     void givenUser_whenRequestForUserIsIssued_thenReturnUser() throws Exception {
-        this.mockMvc.perform(post("/spring-demo/users/").contentType(MediaType.APPLICATION_JSON)
+        this.mockMvc.perform(post("/users/").contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(users.get(1)))).andExpect(status().is2xxSuccessful());
 
-        this.mockMvc.perform(get("/spring-demo/users?login=" + users.get(1).getLogin())).andDo(print()).andExpect(status().isOk())
+        this.mockMvc.perform(get("/users?login=" + users.get(1).getLogin())).andDo(print()).andExpect(status().isOk())
                 .andExpect(content().string(containsString(users.get(1).getLastName())));
     }
 

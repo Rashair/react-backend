@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/spring-demo")
+@RequestMapping("/users")
 public class UsersController {
     private UsersService usersService;
 
@@ -25,7 +25,7 @@ public class UsersController {
         this.usersService = usersService;
     }
 
-    @GetMapping("/users")
+    @GetMapping("")
     public ResponseEntity<List<User>> getUsers(@RequestParam(required = false) String login) {
         List<User> result;
         if (login != null && login.length() > 0)
@@ -39,7 +39,7 @@ public class UsersController {
         return ResponseEntity.ok(result);
     }
 
-    @GetMapping("/users/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<User> getUser(@PathVariable(value = "id") int id) {
         User result = usersService.findById(id);
         if (result == null) {
@@ -49,7 +49,7 @@ public class UsersController {
         return ResponseEntity.ok(result);
     }
 
-    @PostMapping("/users/")
+    @PostMapping("/")
     public ResponseEntity<User> createUser(@Valid @RequestBody User user) {
         if (usersService.exists(user)) {
             throw new UserAlreadyExistsException("Login: " + user.getLogin());
@@ -60,7 +60,7 @@ public class UsersController {
         return ResponseEntity.ok(result);
     }
 
-    @PutMapping("/users/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<User> updateUser(@PathVariable(value = "id") int id, @Valid @RequestBody User user) {
         User userToUpdate = usersService.findById(id);
         if (userToUpdate == null) {
@@ -74,7 +74,7 @@ public class UsersController {
         return ResponseEntity.ok(updatedUser);
     }
 
-    @DeleteMapping("/users/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Map<String, Boolean>> deleteUser(@PathVariable(value = "id") int id) {
         User userToDelete = usersService.findById(id);
         if (userToDelete == null) {
